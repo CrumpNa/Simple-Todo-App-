@@ -1,4 +1,3 @@
-
 package com.example.simpletodoapp1;
 
 
@@ -37,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
         etItem= findViewById(R.id.etItem);
         rvItems= findViewById(R.id.rvItems);
 
-        items=new ArrayList<>();
-        items.add("Buy milk");
+        loadItems(); //will load items to the list upon launching app
+       /* items.add("Buy milk");
         items.add("Go to gym");
-        items.add("Make sure to have fun");
+        items.add("Make sure to have fun");*/
 
-        ItemsAdapter.OnLongClickListener onLongClickListener=new ItemsAdapter.OnLongClickListener(){
+        ItemsAdapter.OnLongClickListener onLongClickListener= new ItemsAdapter.OnLongClickListener(){
             @Override
             public void onItemLongClicked(int position) {
                 //delete the item from the model
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 saveItems();
             }
         };
-        final ItemsAdapter itemsAdapter=new ItemsAdapter(items,onLongClickListener);
+        itemsAdapter = new ItemsAdapter(items,onLongClickListener);
         rvItems.setAdapter(itemsAdapter);
         rvItems.setLayoutManager(new LinearLayoutManager(this));
 
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 etItem.setText("");//clear edit text box
                 Toast.makeText(getApplicationContext(),"Item was added", Toast.LENGTH_SHORT).show();
                 //with stmt above, confirmation pops up that "Item was added"
-                saveItems();
+                saveItems(); //saves list for persistence
             }
         });
     }
@@ -78,26 +77,28 @@ public class MainActivity extends AppCompatActivity {
     }
     //this function:
     //reads lines of data file and loads the items
-    private void loadItems(){
+    private void loadItems(){ //called when app loads up
         try {
             items=new ArrayList<>(FileUtils.readLines(getDataFile(), Charset.defaultCharset()));
         } catch (IOException e) {
             Log.e("Main Activity","Error reading items",e);
-            items=new ArrayList<>();
+            items=new ArrayList<>(); //empty array list
         }
 
     }
     //saves items by writing them into the data file
-    private void saveItems(){
+    private void saveItems(){ // called when we want to make a change to the to do list
         try {
             FileUtils.writeLines(getDataFile(),items);
         } catch (IOException e) {
             Log.e("Main Activity","Error writing items",e);
+
         }
 
 
     }
 }
+
 
 
 

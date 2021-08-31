@@ -1,3 +1,4 @@
+
 package com.example.simpletodoapp1;
 
 import android.support.annotation.NonNull;
@@ -73,4 +74,5 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         }
     }
 }
+
 
