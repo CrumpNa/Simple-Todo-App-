@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 //with stmt above, confirmation pops up that "Item was added"
                 saveItems(); //saves list for persistence
             }
-        });
+        });//
     }
     private File getDataFile(){
         return new File(getFilesDir(),"data.txt");
